@@ -1,0 +1,17 @@
+services:
+  wud:
+    image: ghcr.io/fmartinou/whats-up-docker
+    container_name: wud
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/Docker/WUD/config:/etc/wud/config:ro  # Optioneel: voor aangepaste configuratiebestanden
+    environment:
+#      - WUD_AUTH_BASIC_USER=${WUD_USERNAME}
+#      - WUD_AUTH_BASIC_HASH=${WUD_PASSWORD_HASH}
+      - WUD_TRIGGER_DOCKER_CONTAINER_LABELS=true
+      - WUD_TRIGGER_DOCKER_SWARM_SERVICES=false
+      - WUD_TRIGGER_DOCKER_DOCKER_COMPOSE_FILES=false
+    restart: always
+

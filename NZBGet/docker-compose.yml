@@ -1,0 +1,16 @@
+services:
+  nzbget:
+    image: lscr.io/linuxserver/nzbget:latest
+    container_name: nzbget
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+#      - NZBGET_USER=$NZBU_USER #optional
+#      - NZBGET_PASS=$NZB_PASS #optional
+    volumes:
+      - /mnt/Docker/NZBGet/config:/config
+      - /mnt/NZBGet/downloads:/downloads #optional
+    ports:
+      - 6789:6789
+    restart: unless-stopped
