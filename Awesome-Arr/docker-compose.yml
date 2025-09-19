@@ -1,4 +1,4 @@
-name: ezarr
+name: Awesome-Arr
 services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -11,6 +11,8 @@ services:
     volumes:
       - ${ROOT_DIR}/config/sonarr-config:/config
       - ${DATA_DIR}/data:/data
+      - ${Series_DIR}/Series:/data/Series  
+      - ${Series_DIR}/Series Kinderen:/data/Series Kinderen         
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -26,6 +28,8 @@ services:
     volumes:
       - ${ROOT_DIR}/config/radarr-config:/config
       - ${DATA_DIR}/data:/data
+      - ${FILMS_DIR}/Films:/data/Films
+      - ${FILMS_DIR}/Films Kids:/data/Films Kids 
     ports:
       - "7878:7878"
     restart: unless-stopped
@@ -117,19 +121,19 @@ services:
       - "5055:5055"
     restart: unless-stopped
 
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    environment:
-      - PUID=${JELLYSEERR_UID}
-      - PGID=${MEDIACENTER_GID}
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${ROOT_DIR}/config/jellyseerr-config:/app/config
-    ports:
-      - "5056:5055"
-    restart: unless-stopped
+#  jellyseerr:
+#    image: fallenbagel/jellyseerr:latest
+#    container_name: jellyseerr
+#    environment:
+#      - PUID=${JELLYSEERR_UID}
+#      - PGID=${MEDIACENTER_GID}
+#      - UMASK=002
+#      - TZ=${TIMEZONE}
+#    volumes:
+#      - ${ROOT_DIR}/config/jellyseerr-config:/app/config
+#    ports:
+#      - "5056:5055"
+#    restart: unless-stopped
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -213,24 +217,23 @@ services:
   #    - "8181:8181"
   #  restart: unless-stopped
 
-  jellyfin:
-    image: lscr.io/linuxserver/jellyfin:latest
-    container_name: jellyfin
-    environment:
-      - PUID=${UID}
-      - PGID=${MEDIACENTER_GID}
-      - UMASK=002
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${ROOT_DIR}/config/jellyfin-config:/config
-      - ${DATA_DIR}/data/media:/data
-      - ${FILMS_DIR}/Films:/films
-      - ${SERIES_DIR}/Series:/series
-      - ${MUZIEK_DIR}/Muziek:/music
-
-    ports:
-      - "8096:8096"
-    restart: unless-stopped
+#  jellyfin:
+#    image: lscr.io/linuxserver/jellyfin:latest
+#    container_name: jellyfin
+#    environment:
+#      - PUID=${UID}
+#      - PGID=${MEDIACENTER_GID}
+#      - UMASK=002
+#      - TZ=${TIMEZONE}
+#    volumes:
+###      - ${ROOT_DIR}/config/jellyfin-config:/config
+#      - ${DATA_DIR}/data/media:/data
+#      - ${FILMS_DIR}/Films:/films
+#      - ${SERIES_DIR}/Series:/series
+#      - ${MUZIEK_DIR}/Muziek:/music
+#    ports:
+#      - "8096:8096"
+#    restart: unless-stopped
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -243,7 +246,7 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - ${ROOT_DIR}/config/qbittorrent-config:/config
-      - ${DATA_DIR}/data/torrents:/data/torrents
+      - ${DATA_DIR}/torrents:/data/torrents
     ports:
       - "8080:8080"
       - "6881:6881"
@@ -260,7 +263,11 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/sabnzbd-config:/config
-      - ${DATA_DIR}/data/usenet:/data/usenet
+      - ${DATA_DIR}/usenet:/data/usenet
+      - ${FILMS_DIR}/Films:/data/Films
+      - ${FILMS_DIR}/Films Kids:/data/Films Kids
+      - ${Series_DIR}/Series:/data/Series  
+      - ${Series_DIR}/Series Kinderen:/data/Series Kinderen        
     ports:
       - "8081:8080"
     restart: unless-stopped
