@@ -12,7 +12,7 @@ services:
       - ${ROOT_DIR}/config/sonarr-config:/config
       - ${DATA_DIR}/data:/data
       - ${Series_DIR}/Series:/data/Series  
-      - ${Series_DIR}/Series Kinderen:/data/Series Kinderen         
+      - ${Series_DIR}/Series\ Kinderen:/data/Series Kinderen         
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -29,7 +29,7 @@ services:
       - ${ROOT_DIR}/config/radarr-config:/config
       - ${DATA_DIR}/data:/data
       - ${FILMS_DIR}/Films:/data/Films
-      - ${FILMS_DIR}/Films Kids:/data/Films Kids 
+      - ${FILMS_DIR}/Films\ Kids:/data/Films Kids 
     ports:
       - "7878:7878"
     restart: unless-stopped
@@ -265,9 +265,9 @@ services:
       - ${ROOT_DIR}/config/sabnzbd-config:/config
       - ${DATA_DIR}/usenet:/data/usenet
       - ${FILMS_DIR}/Films:/data/Films
-      - ${FILMS_DIR}/Films Kids:/data/Films Kids
+      - ${FILMS_DIR}/Films\ Kids:/data/Films Kids
       - ${Series_DIR}/Series:/data/Series  
-      - ${Series_DIR}/Series Kinderen:/data/Series Kinderen        
+      - ${Series_DIR}/Series\ Kinderen:/data/Series Kinderen        
     ports:
       - "8081:8080"
     restart: unless-stopped
