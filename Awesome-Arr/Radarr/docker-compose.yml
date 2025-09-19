@@ -3,11 +3,11 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=13002
+      - PGID=13002
       - TZ=Europe/Amsterdam
     volumes:
-      - /mnt/Docker/Awesome-Arr/Radarr/data:/config
+      - /mnt/Downloads/Awesome-Arr/Radarr/data:/config
 #      - /path/to/movies:/movies #optional
       - /mnt/NZBGet/downloads:/downloads #optional
     ports:
