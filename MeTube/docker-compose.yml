@@ -4,7 +4,7 @@ services:
     image: alexta69/metube
     ports:
       - "8880:8080"
-      - "8081:8081"
+      - "8082:8081"
     volumes:
       - /mnt/MeTube:/downloads
       - /mnt/Docker/MeTube/config:/config
