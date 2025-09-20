@@ -288,3 +288,17 @@ services:
       - ${ROOT_DIR}/config/notifiarr-config:/config
       - /var/run/utmp:/var/run/utmp
       - /etc/machine-id:/etc/machine-id
+
+  profilarr:
+    image: santiagosayshey/profilarr:latest # or :beta
+    container_name: profilarr
+    ports:
+      - "6868:6868"
+    volumes:
+      - ${ROOT_DIR}/config:/config
+    environment:
+      - PUID=1000 # Set to your user ID
+      - PGID=1000 # Set to your group ID
+      - UMASK=022 # Optional, defaults to 022
+      - TZ=${TIMEZONE}
+    restart: unless-stopped      
