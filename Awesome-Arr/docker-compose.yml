@@ -277,17 +277,17 @@ services:
 
 
   # Replace or pass in APPDATA (below).
-  notifiarr:
-    container_name: notifiarr
-    hostname: notifiarr
-    image: golift/notifiarr
-    restart: unless-stopped
-    ports:
-      - "5454:5454"
-    volumes:
-      - ${ROOT_DIR}/config/notifiarr-config:/config
-      - /var/run/utmp:/var/run/utmp
-      - /etc/machine-id:/etc/machine-id
+#  notifiarr:
+#    container_name: notifiarr
+#    hostname: notifiarr
+#    image: golift/notifiarr
+#    restart: unless-stopped
+#    ports:
+#      - "5454:5454"
+#    volumes:
+#      - ${ROOT_DIR}/config/notifiarr-config:/config
+#      - /var/run/utmp:/var/run/utmp
+#      - /etc/machine-id:/etc/machine-id
 
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
@@ -295,7 +295,7 @@ services:
     ports:
       - "6868:6868"
     volumes:
-      - ${ROOT_DIR}/config:/config
+      - ${ROOT_DIR}/config/profilarr-config:/config
     environment:
       - PUID=1000 # Set to your user ID
       - PGID=1000 # Set to your group ID
