@@ -11,7 +11,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/sonarr-config:/config
       - ${DATA_DIR}/data:/data
-      - ${Series_DIR}/:/data/Series         
+      - ${SERIES_DIR}/:/data/Series         
     ports:
       - "8989:8989"
     restart: unless-stopped
@@ -263,7 +263,7 @@ services:
       - ${ROOT_DIR}/config/sabnzbd-config:/config
       - ${DATA_DIR}/usenet:/data/usenet
       - ${FILMS_DIR}/:/data/Films
-      - ${Series_DIR}/:/data/Series
+      - ${SERIES_DIR}/:/data/Series
     ports:
       - "8081:8080"
     restart: unless-stopped
