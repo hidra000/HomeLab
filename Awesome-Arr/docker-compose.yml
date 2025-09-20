@@ -273,3 +273,18 @@ services:
     ports:
       - "8081:8080"
     restart: unless-stopped
+
+
+
+  # Replace or pass in APPDATA (below).
+  notifiarr:
+    container_name: notifiarr
+    hostname: notifiarr
+    image: golift/notifiarr
+    restart: unless-stopped
+    ports:
+      - "5454:5454"
+    volumes:
+      - ${ROOT_DIR}/config/notifiarr-config:/config
+      - /var/run/utmp:/var/run/utmp
+      - /etc/machine-id:/etc/machine-id
