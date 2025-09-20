@@ -11,6 +11,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/sonarr-config:/config
       - ${DATA_DIR}/data:/data
+      - ${DATA_DIR}/usenet:/data/usenet
       - ${SERIES_DIR}/:/data/Series         
     ports:
       - "8989:8989"
@@ -27,6 +28,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/radarr-config:/config
       - ${DATA_DIR}/data:/data
+      - ${DATA_DIR}/usenet:/data/usenet      
       - ${FILMS_DIR}/:/data/Films
     ports:
       - "7878:7878"
@@ -42,6 +44,7 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/lidarr-config:/config
+      - ${DATA_DIR}/usenet:/data/usenet      
       - ${DATA_DIR}/data:/data
     ports:
       - "8686:8686"
@@ -71,6 +74,7 @@ services:
       - UMASK=002
     volumes:
       - ${ROOT_DIR}/config/mylar-config:/config
+      - ${DATA_DIR}/usenet:/data/usenet      
       - ${DATA_DIR}/data:/data
     ports:
       - "8090:8090"
@@ -87,6 +91,7 @@ services:
       - ${DATA_DIR}/data/media/audiobooks:/audiobooks
       - ${DATA_DIR}/data/media/podcasts:/podcasts
       - ${DATA_DIR}/data/media/audiobookshelf-metadata:/metadata
+      - ${DATA_DIR}/usenet:/data/usenet      
     ports:
       - "13378:80"
     restart: unless-stopped
@@ -101,6 +106,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/bazarr-config:/config
       - ${DATA_DIR}/data/media:/media
+      - ${DATA_DIR}/usenet:/data/usenet      
     ports:
       - "6767:6767"
     restart: unless-stopped
