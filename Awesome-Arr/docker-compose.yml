@@ -193,36 +193,6 @@ services:
       - "8191:8191"
     restart: unless-stopped
 
-#  plex:
-#    image: lscr.io/linuxserver/plex:latest
-#    container_name: plex
-#    network_mode: host
-#    environment:
-#      - PUID=${PLEX_UID}
-#      - PGID=${MEDIACENTER_GID}
-#      - VERSION=docker
-#      - PLEX_CLAIM=${PLEX_CLAIM}
-#    volumes:
-#      - ${ROOT_DIR}/config/plex-config:/config
-#      - ${DATA_DIR}/data/media:/media
-#    restart: unless-stopped
-
-  #:
-  #  image: lscr.io/linuxserver/tautulli:latest
-  #  container_name: tautulli
-  #  # commented out because plex can also run outside of docker
-  #  #depends_on: 
-  #  #  - plex
-  #  environment:
-  #    - PUID=${UID}
-  #    - PGID=${MEDIACENTER_GID}
-  #    - TZ=${TIMEZONE}
-  #  volumes:
-  #    - ${ROOT_DIR}/config/tautulli-config:/config
-  #  ports:
-  #    - "8181:8181"
-  #  restart: unless-stopped
-
 #  jellyfin:
 #    image: lscr.io/linuxserver/jellyfin:latest
 #    container_name: jellyfin
@@ -276,21 +246,6 @@ services:
       - "8081:8080"
     restart: unless-stopped
 
-
-
-  # Replace or pass in APPDATA (below).
-#  notifiarr:
-#    container_name: notifiarr
-#    hostname: notifiarr
-#    image: golift/notifiarr
-#    restart: unless-stopped
-#    ports:
-#      - "5454:5454"
-#    volumes:
-#      - ${ROOT_DIR}/config/notifiarr-config:/config
-#      - /var/run/utmp:/var/run/utmp
-#      - /etc/machine-id:/etc/machine-id
-
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
     container_name: profilarr
@@ -304,3 +259,16 @@ services:
       - UMASK=022 # Optional, defaults to 022
       - TZ=${TIMEZONE}
     restart: unless-stopped      
+
+  tautulli:
+    image: ghcr.io/tautulli/tautulli
+    container_name: tautulli
+    restart: unless-stopped
+    volumes:
+      - ${ROOT_DIR}/config/tautulli-config:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - 8181:8181    
