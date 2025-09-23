@@ -20,6 +20,7 @@ services:
      - 8882:80
     volumes:
      - /mnt/Docker/Spotweb/config:/config
+     - /mnt/Docker/Spotweb/cache:/app/cache
 
   spotweb_db:
     image: linuxserver/mariadb
