@@ -106,7 +106,9 @@ services:
     volumes:
       - ${ROOT_DIR}/config/bazarr-config:/config
       - ${DATA_DIR}/data/media:/media
-      - ${DATA_DIR}/usenet:/data/usenet      
+      - ${DATA_DIR}/usenet:/data/usenet     
+      - ${FILMS_DIR}/:/data/Films    
+      - ${SERIES_DIR}/:/data/Series           
     ports:
       - "6767:6767"
     restart: unless-stopped
