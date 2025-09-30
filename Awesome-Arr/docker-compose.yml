@@ -127,20 +127,6 @@ services:
       - "5055:5055"
     restart: unless-stopped
 
-#  jellyseerr:
-#    image: fallenbagel/jellyseerr:latest
-#    container_name: jellyseerr
-#    environment:
-#      - PUID=${JELLYSEERR_UID}
-#      - PGID=${MEDIACENTER_GID}
-#      - UMASK=002
-#      - TZ=${TIMEZONE}
-#    volumes:
-#      - ${ROOT_DIR}/config/jellyseerr-config:/app/config
-#    ports:
-#      - "5056:5055"
-#    restart: unless-stopped
-
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
@@ -155,18 +141,6 @@ services:
       - "9696:9696"
     restart: unless-stopped
 
-  homarr:
-    container_name: homarr
-    image: ghcr.io/homarr-labs/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./homarr/appdata:/appdata
-    environment:
-      - SECRET_ENCRYPTION_KEY=
-    ports:
-      - "7575:7575"
-  
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
