@@ -11,6 +11,6 @@ services:
 #      - PLEX_CLAIM= #optional
     volumes:
       - /mnt/Docker/Plex/library:/config
-      - /mnt/plex/films/Films:/mnt/plex/films
-      - /mnt/plex/muziek:/mnt/plex/muziek
+      - /mnt/plex/films:/films
+      - /mnt/plex/muziek:/muziek
     restart: unless-stopped
