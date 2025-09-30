@@ -114,7 +114,7 @@ services:
     restart: unless-stopped
 
   overseerr:
-    image: sctx/overseerr:latest
+    image: sctx/overseerr:develop
     container_name: overseerr
     environment:
       - PUID=${OVERSEERR_UID}
