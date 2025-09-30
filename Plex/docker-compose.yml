@@ -9,8 +9,12 @@ services:
       - TZ=Europe/Amsterdam
       - VERSION=docker
 #      - PLEX_CLAIM= #optional
+      - PLEX_ARCH=amd64
     volumes:
       - /mnt/Docker/Plex/library:/config
       - /mnt/plex/films:/films
       - /mnt/plex/muziek:/muziek
+    devices:
+      - "/dev/dri/card0:/dev/dri/card0"
+      - "/dev/dri/renderD128:/dev/dri/renderD128"      
     restart: unless-stopped
