@@ -13,5 +13,11 @@ services:
       - WUD_TRIGGER_DOCKER_CONTAINER_LABELS=true
       - WUD_TRIGGER_DOCKER_SWARM_SERVICES=false
       - WUD_TRIGGER_DOCKER_DOCKER_COMPOSE_FILES=false
+      - WUD_WATCHER_LOCAL_CRON=0 1 * * *   
+      - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true  
+      - WUD_TRIGGER_DOCKER_LOCAL_AUTO=false  
+      - WUD_WATCHER_LOCAL_WATCHALL=true
+      - TZ=Europe/Amsterdam
+
     restart: always
 
