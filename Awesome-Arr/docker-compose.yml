@@ -10,7 +10,6 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/sonarr-config:/config
-      - ${DATA_DIR}/data:/data
       - ${DATA_DIR}/usenet:/data/usenet
       - ${SERIES_DIR}/:/data/Series
     ports:
@@ -31,7 +30,6 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/radarr-config:/config
-      - ${DATA_DIR}/data:/data
       - ${DATA_DIR}/usenet:/data/usenet
       - ${FILMS_DIR}/:/data/Films
     ports:
@@ -53,7 +51,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/lidarr-config:/config
       - ${DATA_DIR}/usenet:/data/usenet
-      - ${DATA_DIR}/data:/data
+      - ${MUZIEK_DIR}/lidarr:/data/media
     ports:
       - "8686:8686"
     restart: unless-stopped
@@ -91,7 +89,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/mylar-config:/config
       - ${DATA_DIR}/usenet:/data/usenet
-      - ${DATA_DIR}/data:/data
+      - ${DATA_DIR}/data/media:/data/media
     ports:
       - "8090:8090"
     restart: unless-stopped
@@ -275,6 +273,7 @@ services:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
       - 'wud.tag.include=latest'
       - 'wud.watch.digest=true'
+
 
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
