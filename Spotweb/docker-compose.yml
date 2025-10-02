@@ -21,6 +21,9 @@ services:
     volumes:
      - /mnt/Docker/Spotweb/config:/config
      - /mnt/Docker/Spotweb/cache:/app/cache
+    labels:
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.link.template=https://github.com/spotweb/spotweb/tags$${major}.$${minor}.$${patch}'
 
   spotweb_db:
     image: linuxserver/mariadb
@@ -38,3 +41,6 @@ services:
      - /mnt/Docker/Spotweb/mariadb:/config
     ports:
      - 3306:3306
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.link.template=https://github.com/MariaDB/server/releases/tag/mariadb-$${major}.$${minor}.$${patch}'
