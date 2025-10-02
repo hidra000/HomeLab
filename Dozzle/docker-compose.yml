@@ -9,3 +9,5 @@ services:
     restart: always
     environment:
       - DOZZLE_REMOTE_AGENT=192.168.111.222:7007
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'

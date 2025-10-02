@@ -16,6 +16,8 @@ services:
     ports:
       - "8989:8989"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -33,6 +35,8 @@ services:
     ports:
       - "7878:7878"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -49,6 +53,8 @@ services:
     ports:
       - "8686:8686"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
 #  readarr:
 #    image: lscr.io/linuxserver/readarr:develop
@@ -79,6 +85,8 @@ services:
     ports:
       - "8090:8090"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
@@ -95,6 +103,8 @@ services:
     ports:
       - "13378:80"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -112,6 +122,8 @@ services:
     ports:
       - "6767:6767"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   overseerr:
     image: sctx/overseerr:develop
@@ -126,6 +138,8 @@ services:
     ports:
       - "5055:5055"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -140,6 +154,8 @@ services:
     ports:
       - "9696:9696"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   jackett:
     image: lscr.io/linuxserver/jackett:latest
@@ -154,6 +170,8 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -166,6 +184,8 @@ services:
     ports:
       - "8191:8191"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
 #  jellyfin:
 #    image: lscr.io/linuxserver/jellyfin:latest
@@ -202,6 +222,8 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -219,6 +241,8 @@ services:
     ports:
       - "8081:8080"
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
@@ -233,6 +257,8 @@ services:
       - UMASK=022 # Optional, defaults to 022
       - TZ=${TIMEZONE}
     restart: unless-stopped      
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   tautulli:
     image: ghcr.io/tautulli/tautulli
@@ -246,6 +272,8 @@ services:
       - TZ=${TIMEZONE}
     ports:
       - 8181:8181    
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -260,6 +288,8 @@ services:
       - /mnt/Docker/Homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped       
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
 
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
@@ -274,3 +304,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
+    labels:
+      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'    

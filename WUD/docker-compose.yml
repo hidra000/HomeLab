@@ -7,6 +7,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt/Docker/WUD/config:/etc/wud/config:ro  # Optioneel: voor aangepaste configuratiebestanden
+      - /mnt/Docker/WUD/Store:/store       
     environment:
 #      - WUD_AUTH_BASIC_USER=${WUD_USERNAME}
 #      - WUD_AUTH_BASIC_HASH=${WUD_PASSWORD_HASH}
