@@ -18,6 +18,8 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.link.template=https://github.com/linuxserver/docker-sonarr/pkgs/container/sonarr/$${major}.$${minor}.$${patch}'
+
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -37,6 +39,8 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
