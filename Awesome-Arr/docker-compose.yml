@@ -17,7 +17,7 @@ services:
       - "8989:8989"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -36,7 +36,7 @@ services:
       - "7878:7878"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   lidarr:
     image: lscr.io/linuxserver/lidarr:latest
@@ -54,7 +54,7 @@ services:
       - "8686:8686"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
 #  readarr:
 #    image: lscr.io/linuxserver/readarr:develop
@@ -86,7 +86,7 @@ services:
       - "8090:8090"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
@@ -104,7 +104,7 @@ services:
       - "13378:80"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -123,7 +123,7 @@ services:
       - "6767:6767"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   overseerr:
     image: sctx/overseerr:develop
@@ -139,7 +139,7 @@ services:
       - "5055:5055"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:develop
@@ -155,7 +155,7 @@ services:
       - "9696:9696"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   jackett:
     image: lscr.io/linuxserver/jackett:latest
@@ -171,7 +171,7 @@ services:
       - 9117:9117
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -185,7 +185,7 @@ services:
       - "8191:8191"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
 #  jellyfin:
 #    image: lscr.io/linuxserver/jellyfin:latest
@@ -223,7 +223,7 @@ services:
       - "6881:6881/udp"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
@@ -242,7 +242,7 @@ services:
       - "8081:8080"
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
@@ -258,7 +258,7 @@ services:
       - TZ=${TIMEZONE}
     restart: unless-stopped      
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   tautulli:
     image: ghcr.io/tautulli/tautulli
@@ -273,7 +273,7 @@ services:
     ports:
       - 8181:8181    
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -289,7 +289,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
     restart: unless-stopped       
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
@@ -305,4 +305,4 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'    
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'    

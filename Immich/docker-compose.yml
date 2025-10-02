@@ -32,7 +32,7 @@ services:
     healthcheck:
       disable: false
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -50,7 +50,7 @@ services:
     healthcheck:
       disable: false
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   redis:
     container_name: immich_redis
@@ -59,7 +59,7 @@ services:
       test: redis-cli ping || exit 1
     restart: always
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
 
   database:
     container_name: immich_postgres
@@ -77,7 +77,7 @@ services:
     shm_size: 128mb
     restart: always
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
       
 volumes:
   model-cache:

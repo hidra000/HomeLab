@@ -15,4 +15,4 @@ services:
       - STATE_DIR=/config/.metube
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^mariadb-\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
