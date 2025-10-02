@@ -22,8 +22,8 @@ services:
       - ${FOTO_UPLOAD_LOCATION}:/Fotos
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - stack.env    
-    ports:      
+      - stack.env
+    ports:
       - '2283:2283'
     depends_on:
       - redis
@@ -32,7 +32,10 @@ services:
     healthcheck:
       disable: false
     labels:
+      # Volg officiële numerieke versies én de 'release' tag. Digest tracking is cruciaal voor de 'release' tag.
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=release'
+      - 'wud.watch.digest=true'
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -50,20 +53,27 @@ services:
     healthcheck:
       disable: false
     labels:
+      # Volg officiële numerieke versies én de 'release' tag. Digest tracking is cruciaal voor de 'release' tag.
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=release'
+      - 'wud.watch.digest=true'
 
   redis:
     container_name: immich_redis
-    image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
+    # SHA-digest verwijderd om WUD in staat te stellen updates te zien voor de '8-bookworm' tag
+    image: docker.io/valkey/valkey:8-bookworm
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
     labels:
-      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      # Match de exacte tag en gebruik digest tracking om wijzigingen op de tag te detecteren.
+      - 'wud.tag.include=^8-bookworm$'
+      - 'wud.watch.digest=true'
 
   database:
     container_name: immich_postgres
-    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:8d292bdb796aa58bbbaa47fe971c8516f6f57d6a47e7172e62754feb6ed4e7b0
+    # SHA-digest verwijderd om WUD in staat te stellen updates te zien voor deze complexe tag
+    image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
@@ -77,7 +87,9 @@ services:
     shm_size: 128mb
     restart: always
     labels:
-      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
-      
+      # Match de start van de complexe tag en gebruik digest tracking.
+      - 'wud.tag.include=^14-vectorchord'
+      - 'wud.watch.digest=true'
+
 volumes:
   model-cache:
