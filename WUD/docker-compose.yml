@@ -8,30 +8,32 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /mnt/Docker/WUD/config:/etc/wud/config:ro  # Optioneel: voor aangepaste configuratiebestanden
       - /mnt/Docker/WUD/Store:/store       
+      
     environment:
-#      - WUD_AUTH_BASIC_USER=${WUD_USERNAME}
-#      - WUD_AUTH_BASIC_HASH=${WUD_PASSWORD_HASH}
-      - WUD_TRIGGER_DOCKER_CONTAINER_LABELS=true
-      - WUD_TRIGGER_DOCKER_SWARM_SERVICES=false
-      - WUD_TRIGGER_DOCKER_DOCKER_COMPOSE_FILES=false
-        ## Trigger DOCKER-COMPOSE
-      - WUD_TRIGGER_DOCKERCOMPOSE_UPDATE_FILE=/docker-compose.yml
-      - WUD_TRIGGER_DOCKERCOMPOSE_UPDATE_BACKUP=true
-      - WUD_TRIGGER_DOCKERCOMPOSE_UPDATE_PRUNE=true  
-        ## Cron Job    
-      - WUD_WATCHER_LOCAL_CRON=0 1 * * *   
-      - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true  
-      - WUD_TRIGGER_DOCKER_LOCAL_AUTO=false  
-      - WUD_WATCHER_LOCAL_WATCHALL=true
+      # Auth (optioneel, maar aanbevolen)
+      # - WUD_AUTH_BASIC_USER=${WUD_USERNAME}
+      # - WUD_AUTH_BASIC_HASH=${WUD_PASSWORD_HASH}
+
+      # Watcher instellingen
+      - WUD_WATCHER_LOCAL_CRON=0 1 * * * # Controleer dagelijks om 01:00 uur
+      - WUD_WATCHER_LOCAL_WATCHALL=true       # Controleer ALLE containers op deze host (inclusief Awesome-Arr)
       - TZ=Europe/Amsterdam
-        ## MQTT
+      
+      # Trigger instellingen
+      - WUD_TRIGGER_DOCKER_CONTAINER_LABELS=true # Lees de labels in je Awesome-Arr stack
+      - WUD_TRIGGER_DOCKER_LOCAL_AUTO=false      # Zet deze op FALSE, zodat WUD updates alleen meldt via MQTT/WebUI. Dit is veiliger dan autom. updates over verschillende compose-bestanden.
+      - WUD_TRIGGER_DOCKER_LOCAL_PRUNE=true      # Ruim oude images na een update op
+
+      # MQTT (Je huidige, prima configuratie)
       - WUD_TRIGGER_ENABLED=mqtt
       - WUD_TRIGGER_MQTT_MOSQUITTO_URL=mqtt://192.168.110.10:1883
       - WUD_TRIGGER_MQTT_HASS_ENABLED=true
       - WUD_TRIGGER_MQTT_HASS_DISCOVERY=true
       - WUD_TRIGGER_MQTT_MOSQUITTO_CLIENTID=wud
       - WUD_TRIGGER_MQTT_MOSQUITTO_USER=wud
-      - WUD_TRIGGER_MQTT_MOSQUITTO_PASSWORD=MYPASSWORD     
+      - WUD_TRIGGER_MQTT_MOSQUITTO_PASSWORD=MYPASSWORD 
+
+
 
     healthcheck:
       test: curl --fail http://localhost:${WUD_SERVER_PORT:-3000}/health || exit 1

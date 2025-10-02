@@ -12,15 +12,17 @@ services:
       - ${ROOT_DIR}/config/sonarr-config:/config
       - ${DATA_DIR}/data:/data
       - ${DATA_DIR}/usenet:/data/usenet
-      - ${SERIES_DIR}/:/data/Series         
+      - ${SERIES_DIR}/:/data/Series
     ports:
       - "8989:8989"
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   radarr:
-    image: lscr.io/linuxserver/radarr:latest
+    image: linuxserver/radarr:latest
     container_name: radarr
     environment:
       - PUID=${RADARR_UID}
@@ -30,7 +32,7 @@ services:
     volumes:
       - ${ROOT_DIR}/config/radarr-config:/config
       - ${DATA_DIR}/data:/data
-      - ${DATA_DIR}/usenet:/data/usenet      
+      - ${DATA_DIR}/usenet:/data/usenet
       - ${FILMS_DIR}/:/data/Films
     ports:
       - "7878:7878"
@@ -41,7 +43,7 @@ services:
       - 'wud.watch.digest=true'
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
+    image: linuxserver/lidarr:latest
     container_name: lidarr
     environment:
       - PUID=${LIDARR_UID}
@@ -50,31 +52,37 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/lidarr-config:/config
-      - ${DATA_DIR}/usenet:/data/usenet      
+      - ${DATA_DIR}/usenet:/data/usenet
       - ${DATA_DIR}/data:/data
     ports:
       - "8686:8686"
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
-#  readarr:
-#    image: lscr.io/linuxserver/readarr:develop
-#    container_name: readarr
-#    environment:
-#      - PUID=${READARR_UID}
-#      - PGID=${MEDIACENTER_GID}
-#      - UMASK=002
-#      - TZ=${TIMEZONE}
-#    volumes:
-#      - ${ROOT_DIR}/config/readarr-config:/config
-#      - ${DATA_DIR}/data:/data
-#    ports:
-#      - "8787:8787"
-#    restart: unless-stopped
+# readarr:
+#   image: linuxserver/readarr:develop # lscr.io prefix verwijderd
+#   container_name: readarr
+#   environment:
+#     - PUID=${READARR_UID}
+#     - PGID=${MEDIACENTER_GID}
+#     - UMASK=002
+#     - TZ=${TIMEZONE}
+#   volumes:
+#     - ${ROOT_DIR}/config/readarr-config:/config
+#     - ${DATA_DIR}/data:/data
+#   ports:
+#     - "8787:8787"
+#   restart: unless-stopped
+#   labels: # WUD labels toegevoegd voor develop
+#     - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+#     - 'wud.tag.include=develop'
+#     - 'wud.watch.digest=true'
 
   mylar3:
-    image: lscr.io/linuxserver/mylar3:latest
+    image: linuxserver/mylar3:latest
     container_name: mylar3
     environment:
       - PUID=${MYLAR_UID}
@@ -82,13 +90,15 @@ services:
       - UMASK=002
     volumes:
       - ${ROOT_DIR}/config/mylar-config:/config
-      - ${DATA_DIR}/usenet:/data/usenet      
+      - ${DATA_DIR}/usenet:/data/usenet
       - ${DATA_DIR}/data:/data
     ports:
       - "8090:8090"
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   audiobookshelf:
     image: ghcr.io/advplyr/audiobookshelf:latest
@@ -101,15 +111,17 @@ services:
       - ${DATA_DIR}/data/media/audiobooks:/audiobooks
       - ${DATA_DIR}/data/media/podcasts:/podcasts
       - ${DATA_DIR}/data/media/audiobookshelf-metadata:/metadata
-      - ${DATA_DIR}/usenet:/data/usenet      
+      - ${DATA_DIR}/usenet:/data/usenet
     ports:
       - "13378:80"
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   bazarr:
-    image: lscr.io/linuxserver/bazarr:latest
+    image: linuxserver/bazarr:latest
     container_name: bazarr
     environment:
       - PUID=${BAZARR_UID}
@@ -118,14 +130,16 @@ services:
     volumes:
       - ${ROOT_DIR}/config/bazarr-config:/config
       - ${DATA_DIR}/data/media:/media
-      - ${DATA_DIR}/usenet:/data/usenet     
-      - ${FILMS_DIR}/:/data/Films    
-      - ${SERIES_DIR}/:/data/Series           
+      - ${DATA_DIR}/usenet:/data/usenet
+      - ${FILMS_DIR}/:/data/Films
+      - ${SERIES_DIR}/:/data/Series
     ports:
       - "6767:6767"
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   overseerr:
     image: sctx/overseerr:develop
@@ -142,9 +156,11 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=develop' # Aangepast voor de :develop tag
+      - 'wud.watch.digest=true'
 
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:develop
+    image: linuxserver/prowlarr:develop
     container_name: prowlarr
     environment:
       - PUID=${PROWLARR_UID}
@@ -158,15 +174,17 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=develop' # Aangepast voor de :develop tag
+      - 'wud.watch.digest=true'
 
   jackett:
-    image: lscr.io/linuxserver/jackett:latest
+    image: linuxserver/jackett:latest
     container_name: jackett
     environment:
       - PUID=${JACKETT_UID}
       - PGID=${MEDIACENTER_GID}
       - UMASK=002
-      - TZ=${TIMEZONE}    
+      - TZ=${TIMEZONE}
     volumes:
       - ${ROOT_DIR}/config/jackett-config:/config
     ports:
@@ -174,6 +192,8 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -188,27 +208,33 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
-#  jellyfin:
-#    image: lscr.io/linuxserver/jellyfin:latest
-#    container_name: jellyfin
-#    environment:
-#      - PUID=${UID}
-#      - PGID=${MEDIACENTER_GID}
-#      - UMASK=002
-#      - TZ=${TIMEZONE}
-#    volumes:
-###      - ${ROOT_DIR}/config/jellyfin-config:/config
-#      - ${DATA_DIR}/data/media:/data
-#      - ${FILMS_DIR}/Films:/films
-#      - ${SERIES_DIR}/Series:/series
-#      - ${MUZIEK_DIR}/Muziek:/music
-#    ports:
-#      - "8096:8096"
-#    restart: unless-stopped
+# jellyfin:
+#   image: linuxserver/jellyfin:latest # lscr.io prefix verwijderd
+#   container_name: jellyfin
+#   environment:
+#     - PUID=${UID}
+#     - PGID=${MEDIACENTER_GID}
+#     - UMASK=002
+#     - TZ=${TIMEZONE}
+#   volumes:
+# ###      - ${ROOT_DIR}/config/jellyfin-config:/config
+#     - ${DATA_DIR}/data/media:/data
+#     - ${FILMS_DIR}/Films:/films
+#     - ${SERIES_DIR}/Series:/series
+#     - ${MUZIEK_DIR}/Muziek:/music
+#   ports:
+#     - "8096:8096"
+#   restart: unless-stopped
+#   labels: # WUD labels toegevoegd voor digest tracking
+#     - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+#     - 'wud.tag.include=latest'
+#     - 'wud.watch.digest=true'
 
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
       - PUID=${QBITTORRENT_UID}
@@ -226,9 +252,11 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:latest
+    image: linuxserver/sabnzbd:latest
     container_name: sabnzbd
     environment:
       - PUID=${SABNZBD_UID}
@@ -245,6 +273,8 @@ services:
     restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   profilarr:
     image: santiagosayshey/profilarr:latest # or :beta
@@ -258,9 +288,11 @@ services:
       - PGID=1000 # Set to your group ID
       - UMASK=022 # Optional, defaults to 022
       - TZ=${TIMEZONE}
-    restart: unless-stopped      
+    restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   tautulli:
     image: ghcr.io/tautulli/tautulli
@@ -273,9 +305,11 @@ services:
       - PGID=1000
       - TZ=${TIMEZONE}
     ports:
-      - 8181:8181    
+      - 8181:8181
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest' # Toegevoegd
+      - 'wud.watch.digest=true' # Toegevoegd
 
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
@@ -283,15 +317,17 @@ services:
     ports:
       - 3000:3000
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: "*"  # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+      HOMEPAGE_ALLOWED_HOSTS: "*" # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
       PUID: 1000 # optional, your user id
       PGID: 1000 # optional, your group id
     volumes:
       - /mnt/Docker/Homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock:ro # optional, for docker integrations
-    restart: unless-stopped       
+    restart: unless-stopped
     labels:
       - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
 
   dockerproxy:
     image: ghcr.io/tecnativa/docker-socket-proxy:latest
@@ -307,4 +343,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # Mounted as read-only
     restart: unless-stopped
     labels:
-      - 'wud.tag.include=^\d+\.\d+\.\d+$$'    
+      - 'wud.tag.include=^\d+\.\d+\.\d+$$'
+      - 'wud.tag.include=latest'
+      - 'wud.watch.digest=true'
